@@ -83,6 +83,10 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.08;margin:0;lett
 .intro .big{font:500 clamp(1.6rem,2.6vw,2.25rem)/1.35 var(--serif);color:var(--ink);margin-bottom:1em}
 .intro .rest{color:#3b443d;max-width:40em}
 .intro .label{position:sticky;top:110px;align-self:start}
+.intro-media{margin:26px 0 0;overflow:hidden;background:var(--paper-3)}
+.intro-media img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:45% 50%}
+.intro-media figcaption{padding-top:10px;font:600 .64rem/1.4 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);background:var(--paper)}
+.intro{align-items:start}
 .rule{display:block;width:56px;height:1px;background:var(--bronze);margin:18px 0}
 
 /* capabilities */
@@ -193,8 +197,9 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.08;margin:0;lett
 .js .rv{opacity:0;transform:translateY(26px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
 .js .rv.in{opacity:1;transform:none}
 .js .rv-d1{transition-delay:.08s}.js .rv-d2{transition-delay:.16s}.js .rv-d3{transition-delay:.24s}
-.js .rv-img{clip-path:inset(0 0 100% 0);transition:clip-path 1.3s var(--ease)}
-.js .rv-img.in{clip-path:inset(0 0 0 0)}
+/* clip the image, not the observed wrapper: a fully clipped target never reports as intersecting */
+.js .rv-img>img{clip-path:inset(0 0 100% 0);transition:clip-path 1.3s var(--ease)}
+.js .rv-img.in>img{clip-path:inset(0 0 0 0)}
 .js .hero .line{display:block;overflow:hidden}
 .js .hero .line>span{display:block;transform:translateY(105%);transition:transform 1.1s var(--ease)}
 .js .loaded .hero .line>span{transform:none}
@@ -203,7 +208,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.08;margin:0;lett
 
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
-  .js .rv,.js .rv-img,.js .hero .line>span{opacity:1;transform:none;clip-path:none}
+  .js .rv,.js .rv-img>img,.js .hero .line>span{opacity:1;transform:none;clip-path:none}
 }
 
 /* ---------- responsive ---------- */
@@ -214,6 +219,8 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.08;margin:0;lett
   .hero-tag{left:0}
   .section-head,.intro,.about,.contact-grid{grid-template-columns:1fr}
   .intro .label{position:static}
+  .intro-media{max-width:520px}
+  .intro-media img{aspect-ratio:4/3}
   .project,.project:nth-of-type(even){grid-template-columns:1fr}
   .project:nth-of-type(even) .p-media{order:0}
   .p-body{position:static}
